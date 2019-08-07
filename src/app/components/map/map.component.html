@@ -1,0 +1,18 @@
+<agm-map [latitude]="center.lat" [longitude]="center.lng" [minZoom]="3" [streetViewControl]="false"
+  [scaleControl]="true" (mapReady)="onMapReady($event)">
+  <!-- <agm-marker [latitude]="center.lat" [longitude]="center.lng" [label]="'M'">
+    <agm-info-window [disableAutoPan]="true">
+      Hi, this is the content of the <strong>info window</strong>
+    </agm-info-window>
+  </agm-marker> -->
+
+  <agm-polyline [strokeWeight]="weight" (lineMouseOver)="weight = 6" (lineMouseOut)="weight = 4">
+    <agm-polyline-point [latitude]="center.lat + 1" [longitude]="center.lng + 1">
+    </agm-polyline-point>
+    <agm-polyline-point [latitude]="center.lat -1" [longitude]="center.lng -1">
+    </agm-polyline-point>
+
+  </agm-polyline>
+
+
+</agm-map>
