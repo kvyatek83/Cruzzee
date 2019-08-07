@@ -119,6 +119,9 @@ export class MapComponent {
       tripDescription: tripDesc
     }).subscribe(
       (res: Array<Risk>) => {
+        console.log('handling response:');
+        console.log(res);
+        console.log('starting handle');
         this.handleRisksResponse(res);
       }
     );

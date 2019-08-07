@@ -1,6 +1,5 @@
 <agm-map [latitude]="center.lat" [longitude]="center.lng" [minZoom]="3" [streetViewControl]="false"
   [scaleControl]="true" (mapReady)="onMapReady($event)">
-  <agm-info-window [latitude]="center.lat" [longitude]="center.lng">נתישדכשדכשדשגכעשדג</agm-info-window>
 </agm-map>
 <button class="btn" (click)="togglePolylineDraw()">{{ drawingStatus ? 'stop' : 'start'}}</button>
 <app-trip-form *ngIf="openTripForm" (tripCreated)="onTripCreated($event)" class="trip"></app-trip-form>
