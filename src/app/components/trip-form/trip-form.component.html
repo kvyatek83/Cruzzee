@@ -1,0 +1,7 @@
+<form [formGroup]="tripForm">
+  <div class="fields-container">
+    <input type="date" formControlName="departureDate" />
+    <input type="text" placeholder="Cargo..." formControlName="vesselContents" />
+    <button type="submit" (click)="submit()" [disabled]="!tripForm.valid">Submit</button>
+  </div>
+</form>

@@ -2,7 +2,4 @@
   [scaleControl]="true" (mapReady)="onMapReady($event)">
 </agm-map>
 <button class="btn" (click)="togglePolylineDraw()">{{ drawingStatus ? 'stop' : 'start'}}</button>
-<div class="trip" *ngIf="openTripForm">
-  <input type="date" placeholder="Cargo..." />
-  <input type="text" placeholder="Date..." />
-</div>
+<app-trip-form (tripCreated)="onTripCreated($event)" class="trip"></app-trip-form>
