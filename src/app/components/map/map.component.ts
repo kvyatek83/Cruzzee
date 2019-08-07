@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PolygonOptions } from '@agm/core/services/google-maps-types';
 
 declare const google: any;
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -9,12 +10,11 @@ declare const google: any;
 })
 export class MapComponent {
 
-
   map: any;
   drawingManager: any;
   drawingStatus = false;
+  poly: any;
 
-  aa: PolygonOptions;
   weight = 4;
   center: any = {
     lat: 31.5362475,
@@ -35,18 +35,6 @@ export class MapComponent {
   }
 
   initDrawingManager(map: any) {
-    // const options = {
-    //   drawingControl: true,
-    //   drawingControlOptions: {
-    //     drawingModes: ['polyline', 'polygon']
-    //   },
-    //   drawingMode: google.maps.drawing.OverlayType.POLYGON
-    // };
-
-    // const drawingManager = new google.maps.drawing.DrawingManager(options);
-    // drawingManager.setDrawingMode;
-    // drawingManager.setMap(map);
-
     const options = {
       drawingControl: false,
     };
@@ -54,15 +42,15 @@ export class MapComponent {
     this.drawingManager = new google.maps.drawing.DrawingManager(options);
     this.drawingManager.setMap(this.map);
 
-    google.maps.event.addListener(this.drawingManager, 'polygoncomplete', (event) => {
-      const lat = event.latLng.lat();
-      const long = event.latLng.lng();
-      console.log(`Lat ${lat}, Long ${long}`);
+    google.maps.event.addListener(this.drawingManager, 'overlaycomplete', (event) => {
+      if (event.type === google.maps.drawing.OverlayType.POLYLINE) {
+        alert(event.overlay.getPath().getArray());
+      }
     });
+
   }
 
-  start(): void {
-
+  togglePolylineDraw(): void {
     this.drawingStatus = !this.drawingStatus;
     if (this.drawingStatus) {
       this.drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYLINE);
