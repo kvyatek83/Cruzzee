@@ -2,7 +2,18 @@ agm-map {
   height: 590px;
 }
 
-.testtt {
+.btn {
   position: absolute;
   top: 20%;
+}
+
+.trip {
+  position: absolute;
+  bottom: 20%;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  width: 200px;
 }

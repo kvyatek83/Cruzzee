@@ -3,6 +3,11 @@ import { PolygonOptions } from '@agm/core/services/google-maps-types';
 
 declare const google: any;
 
+export interface PolylineColor {
+  color: string;
+  ristLevel: number;
+}
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -13,20 +18,29 @@ export class MapComponent {
   map: any;
   drawingManager: any;
   drawingStatus = false;
-  poly: any;
+  polylines: Array<any>;
+  openTripForm = false;
 
-  weight = 4;
+  ristTable: Array<PolylineColor>;
+
   center: any = {
     lat: 31.5362475,
     lng: 34.9267386
   };
 
-  constructor() { }
 
-  aaa(a: any) {
-    this.weight = 4;
-    // a.setOptions({ strokeColor: '#0000FF' });
-    console.log(a);
+  weight = 4;
+
+
+
+  constructor() {
+    this.polylines = new Array<any>();
+    // this.ristTable = [
+    //   {
+    //     color: 'red',
+    //     ristLevel: 0
+    //   }
+    // ]
   }
 
   onMapReady(map) {
@@ -44,10 +58,31 @@ export class MapComponent {
 
     google.maps.event.addListener(this.drawingManager, 'overlaycomplete', (event) => {
       if (event.type === google.maps.drawing.OverlayType.POLYLINE) {
-        alert(event.overlay.getPath().getArray());
+        const allCoordinates = event.overlay.getPath().getArray();
+        event.overlay.setMap(null);
+
+        for (let index = 1; index < allCoordinates.length; index++) {
+          const poly = new google.maps.Polyline({
+            strokeColor: '#000000',
+            strokeOpacity: 1.0,
+            strokeWeight: 3,
+            path: [allCoordinates[index - 1], allCoordinates[index]]
+          });
+          this.polylines.push(poly);
+          poly.setMap(this.map);
+        }
+
+        this.polylines.forEach((element) => {
+          google.maps.event.addListener(element, 'click', (event) => {
+            console.log('asasasasa');
+          });
+        });
+
+
+        this.openTripForm = true;
+
       }
     });
-
   }
 
   togglePolylineDraw(): void {

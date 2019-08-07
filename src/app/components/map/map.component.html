@@ -1,4 +1,8 @@
 <agm-map [latitude]="center.lat" [longitude]="center.lng" [minZoom]="3" [streetViewControl]="false"
   [scaleControl]="true" (mapReady)="onMapReady($event)">
 </agm-map>
-<button class="testtt" (click)="togglePolylineDraw()">{{ drawingStatus ? 'stop' : 'start'}}</button>
+<button class="btn" (click)="togglePolylineDraw()">{{ drawingStatus ? 'stop' : 'start'}}</button>
+<div class="trip" *ngIf="openTripForm">
+  <input type="date" placeholder="Cargo..." />
+  <input type="text" placeholder="Date..." />
+</div>

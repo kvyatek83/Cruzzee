@@ -1,0 +1,6 @@
+{
+    "/risk": {
+        "target": "http://132.74.208.102:8081",
+        "secure": false
+    }
+}
